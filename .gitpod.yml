@@ -2,10 +2,9 @@ tasks:
   - init: cd /workspace && git clone https://github.com/grafana/grafana && cd /workspace/grafana && yarn install --pure-lockfile --no-progress
     command: yarn start
   - init: cd /workspace && wget https://ftp.itu.edu.tr/Mirror/Apache/lucene/solr/8.8.1/solr-8.8.1.tgz && tar -xvzf ./solr-8.8.1.tgz
-    command:  /workspace/solr-8.8.1/bin/solr start && /workspace/solr-8.8.1/bin/solr create -c films -s 2 -rf 2
-  - init: while true; do [ -d "/workspace/grafana" ] && break; sleep 2; done;
-    command: sleep 10 && cd /workspace/grafana && make run
-
+    command:  /workspace/solr-8.8.1/bin/solr start && /workspace/solr-8.8.1/bin/solr create -c films -s 2 -rf 2 && 
+        /workspace/solr-8.8.1/bin/post -c films /workspace/solr-8.8.1/example/films/films.xml && 
+        while true; do [ -d "/workspace/grafana" ] && break; sleep 2; done; && cd /workspace/grafana
 ports:
   - port: 8983
     onOpen: open-browser
