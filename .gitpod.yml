@@ -1,2 +1,3 @@
-image:
-  file: .gitpod.Dockerfile
+tasks:
+  - init: cd /workspace && git clone https://github.com/grafana/grafana
+    command: cd grafana && yarn install --pure-lockfile --no-progress 
